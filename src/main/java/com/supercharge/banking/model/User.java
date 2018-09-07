@@ -21,4 +21,36 @@ public class User {
 
     public User() {
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Transaction> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<Transaction> history) {
+        this.history = history;
+    }
+
+    public long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(long balance) {
+        this.balance = balance;
+    }
 }
