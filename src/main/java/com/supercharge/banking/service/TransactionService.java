@@ -55,4 +55,23 @@ public class TransactionService {
         }
         return true;
     }
+
+    public boolean Transfer(User source, User target, Long amount) {
+        // todo check if source user's balance can support the withdrawal
+        Transaction transaction = new Transaction();
+        transaction.setUser(source);
+        transaction.setAmount(amount);
+        transaction.setDate(LocalDateTime.now());
+        transaction.setTarget(target);
+        transaction.setType(TransactionType.Transfer);
+        source.setBalance(source.getBalance() - amount);
+        target.setBalance(target.getBalance() + amount);
+        try {
+            transactionRepository.save(transaction);
+        } catch (DataAccessException exception) {
+            System.out.println(exception.getMessage());
+            return false;
+        }
+        return true;
+    }
 }
