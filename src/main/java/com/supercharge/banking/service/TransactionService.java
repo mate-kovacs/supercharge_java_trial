@@ -1,8 +1,13 @@
 package com.supercharge.banking.service;
 
 import com.supercharge.banking.Repository.TransactionRepository;
+import com.supercharge.banking.model.Transaction;
+import com.supercharge.banking.model.TransactionType;
+import com.supercharge.banking.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class TransactionService {
@@ -13,5 +18,16 @@ public class TransactionService {
     @Autowired
     public TransactionService(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
+    }
+
+    public void Deposit(User user, Long amount) {
+        Transaction transaction = new Transaction();
+        transaction.setUser(user);
+        transaction.setAmount(amount);
+        transaction.setDate(LocalDateTime.now());
+        transaction.setTarget(null);
+        transaction.setType(TransactionType.Deposit);
+        user.setBalance(user.getBalance() + amount);
+        transactionRepository.save(transaction);
     }
 }
