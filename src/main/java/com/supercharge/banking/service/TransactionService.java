@@ -21,7 +21,7 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
-    public void Deposit(User user, Long amount) {
+    public boolean Deposit(User user, Long amount) {
         Transaction transaction = new Transaction();
         transaction.setUser(user);
         transaction.setAmount(amount);
@@ -30,6 +30,7 @@ public class TransactionService {
         transaction.setType(TransactionType.Deposit);
         user.setBalance(user.getBalance() + amount);
         transactionRepository.save(transaction);
+        return true;
     }
 
     public boolean Withdraw(User user, Long amount) {
