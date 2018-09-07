@@ -29,7 +29,12 @@ public class TransactionService {
         transaction.setTarget(null);
         transaction.setType(TransactionType.Deposit);
         user.setBalance(user.getBalance() + amount);
-        transactionRepository.save(transaction);
+        try {
+            transactionRepository.save(transaction);
+        } catch (DataAccessException exception){
+            System.out.println(exception.getMessage());
+            return false;
+        }
         return true;
     }
 
