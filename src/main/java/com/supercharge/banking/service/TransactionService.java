@@ -79,4 +79,8 @@ public class TransactionService {
     public List<Transaction> getFullTransactionHistory(User user){
         return transactionRepository.findAllByUserIdOrderByDateDesc(user.getId());
     }
+
+    public List<Transaction> getFilteredTransactionHistory(User user, TransactionType type){
+        return transactionRepository.findAllByUserIdAndTypeOrderByDateDesc(user.getId(), type);
+    }
 }
