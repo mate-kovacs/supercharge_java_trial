@@ -22,6 +22,10 @@ public class User {
     public User() {
     }
 
+    public boolean isBalanceEnough(Long amount) {
+        return amount <= balance;
+    }
+
     public long getId() {
         return id;
     }
