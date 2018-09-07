@@ -10,14 +10,6 @@ import java.util.List;
 @Service
 public class TransactionHistoryUtil {
 
-    final
-    private TransactionService transactionService;
-
-    @Autowired
-    public TransactionHistoryUtil(TransactionService transactionService) {
-        this.transactionService = transactionService;
-    }
-
     public void printTransactionHistory(List<Transaction> history) {
         System.out.println("Transaction history:");
         for (Transaction transaction: history) {
