@@ -57,7 +57,7 @@ public class TransactionService {
     }
 
     public boolean Transfer(User source, User target, Long amount) {
-        // todo check if source user's balance can support the withdrawal
+        source.isBalanceEnough(amount);
         Transaction transaction = new Transaction();
         transaction.setUser(source);
         transaction.setAmount(amount);
