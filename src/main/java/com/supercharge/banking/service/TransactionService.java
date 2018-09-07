@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -73,5 +74,9 @@ public class TransactionService {
             return false;
         }
         return true;
+    }
+
+    public List<Transaction> getFullTransactionHistory(User user){
+        return transactionRepository.findAllByUserIdOrderByDateDesc(user.getId());
     }
 }
