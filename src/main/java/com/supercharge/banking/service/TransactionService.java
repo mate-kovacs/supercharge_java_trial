@@ -45,7 +45,7 @@ public class TransactionService {
         transaction.setAmount(amount);
         transaction.setDate(LocalDateTime.now());
         transaction.setTarget(null);
-        transaction.setType(TransactionType.Deposit);
+        transaction.setType(TransactionType.Withdraw);
         user.setBalance(user.getBalance() - amount);
         try {
             transactionRepository.save(transaction);
