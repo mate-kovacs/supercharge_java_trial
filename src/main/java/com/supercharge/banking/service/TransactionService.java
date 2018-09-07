@@ -39,7 +39,7 @@ public class TransactionService {
     }
 
     public boolean Withdraw(User user, Long amount) {
-        // todo check if user's balance can support the withdrawal
+        user.isBalanceEnough(amount);
         Transaction transaction = new Transaction();
         transaction.setUser(user);
         transaction.setAmount(amount);
