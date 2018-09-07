@@ -73,4 +73,23 @@ public class Transaction {
     public void setTarget(User target) {
         this.target = target;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder transactionStringBuilder = new StringBuilder();
+        transactionStringBuilder.append(type);
+        transactionStringBuilder.append(", ");
+        transactionStringBuilder.append(amount);
+        transactionStringBuilder.append(", ");
+        if (target != null) {
+            transactionStringBuilder.append("To: ");
+            transactionStringBuilder.append(target.getName());
+            transactionStringBuilder.append(", ");
+        }
+        transactionStringBuilder.append("Date: ");
+        transactionStringBuilder.append(date.toLocalDate());
+        transactionStringBuilder.append(" ");
+        transactionStringBuilder.append(date.toLocalTime());
+        return transactionStringBuilder.toString();
+    }
 }
