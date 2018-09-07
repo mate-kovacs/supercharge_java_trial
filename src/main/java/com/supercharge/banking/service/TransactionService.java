@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -82,5 +84,21 @@ public class TransactionService {
 
     public List<Transaction> getFilteredTransactionHistory(User user, TransactionType type){
         return transactionRepository.findAllByUserIdAndTypeOrderByDateDesc(user.getId(), type);
+    }
+
+    public List<Transaction> getFilteredTransactionHistory(User user, LocalDate start, LocalDate end){
+        List<Transaction> history = transactionRepository.findAllByUserIdOrderByDateDesc(user.getId());
+        Iterator<Transaction> iterator = history.listIterator();
+        Transaction currentTransaction;
+        while (iterator.hasNext()){
+            currentTransaction = iterator.next();
+            if (currentTransaction.getDate().toLocalDate().isBefore(start)) {
+                iterator.remove();
+            }
+            if (currentTransaction.getDate().toLocalDate().isAfter(end)){
+                iterator.remove();
+            }
+        }
+        return history;
     }
 }
